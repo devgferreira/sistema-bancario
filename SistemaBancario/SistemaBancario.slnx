@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="SistemaBancario.API/SistemaBancario.API.csproj" />
   <Project Path="SistemaBancario.Domain/SistemaBancario.Domain.csproj" />
+  <Project Path="SistemaBancario.Infrastructure/SistemaBancario.Infrastructure.csproj" />
 </Solution>
