@@ -22,8 +22,6 @@ namespace SistemaBancario.Domain.Entidades.Users
                 throw new ArgumentException("Todos os campos são obrigatórios.");
             }
 
-       
-
             var userInfo = new UsersInfo
             {
                 Nome = nome,
