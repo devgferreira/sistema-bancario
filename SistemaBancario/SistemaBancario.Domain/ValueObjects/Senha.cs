@@ -22,7 +22,7 @@ namespace SistemaBancario.Domain.ValueObjects
             return senha;
         }
 
-        public bool Verificar(string senhaDigitada)
+        public bool VerificarSenha(string senhaDigitada)
         {
             return BCrypt.Net.BCrypt.Verify(senhaDigitada, Hash);
         }
