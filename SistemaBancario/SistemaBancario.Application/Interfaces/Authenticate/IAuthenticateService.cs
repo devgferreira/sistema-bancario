@@ -6,7 +6,7 @@ namespace SistemaBancario.Application.Interfaces.Authenticate
 {
     public interface IAuthenticateService
     {
-        Task<bool> AutenticarAsync(string email, string senha);
+        Task<bool> AutenticarAsync(string cpf, string senha);
         public string GerarToken(string nome, string email, string cpf);
     }
 }
