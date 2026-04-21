@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SistemaBancario.Application.DTO.Users
 {
-    public class UsersRegistroResponse
+    public class UsersRegistroRequest
     {
         public string Nome { get; set; }
         public string Cpf { get; set; }

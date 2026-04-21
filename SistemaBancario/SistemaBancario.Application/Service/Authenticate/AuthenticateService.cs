@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using SistemaBancario.Application.Interfaces.Authenticate;
 using SistemaBancario.Application.Settings;
+using SistemaBancario.Domain.Entidades.Users;
 using SistemaBancario.Domain.Interfaces.Users;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace SistemaBancario.Application.Service.Authenticate
             _configuracao = configuracao;
         }
 
-        public async Task<bool> AutenticarAsync(string cpf, string senha)
+        public async Task<UsersInfo> AutenticarAsync(string cpf, string senha)
         {
             var users = await _usersRepository.BuscarUsuario(null, null, cpf );
 
@@ -36,7 +37,7 @@ namespace SistemaBancario.Application.Service.Authenticate
             {
                 throw new ArgumentException("Senha ou Cpf inválido");
             }
-            return true;
+            return users.FirstOrDefault();
         }
 
         public string GerarToken(string nome, string email, string cpf)

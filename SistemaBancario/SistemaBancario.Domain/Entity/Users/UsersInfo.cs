@@ -15,7 +15,7 @@ namespace SistemaBancario.Domain.Entidades.Users
         public Senha Senha { get; set; }
 
 
-        public UsersInfo Create(string nome, string cpf, string email, string senha)
+        public UsersInfo Create(string nome, string cpf, string email, string senha, string confirmarSenha)
         {
             if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(cpf) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(senha))
             {
@@ -27,7 +27,7 @@ namespace SistemaBancario.Domain.Entidades.Users
                 Nome = nome,
                 Cpf = Cpf.Criar(cpf),
                 Email = Email.Criar(email),
-                Senha = Senha.Criar(senha)
+                Senha = Senha.Criar(senha, confirmarSenha)
             };
             return userInfo;
         }
