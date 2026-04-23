@@ -9,5 +9,6 @@ namespace SistemaBancario.Application.Settings
         string JwtSecretKey { get; }
         string JwtIssuer { get; }
         string JwtAudience { get; }
+        string DatabaseConnection { get; }
     }
 }

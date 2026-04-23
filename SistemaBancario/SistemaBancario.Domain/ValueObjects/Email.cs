@@ -9,7 +9,7 @@ namespace SistemaBancario.Domain.ValueObjects
     {
         public string Valor { get; set; }
 
-        public Email Criar(string email)
+        public static Email Criar(string email)
         {
             if (!EmailValido(email))
             {
@@ -22,7 +22,7 @@ namespace SistemaBancario.Domain.ValueObjects
         }
 
 
-        private bool EmailValido(string email)
+        private static bool EmailValido(string email)
         {
             string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, pattern);

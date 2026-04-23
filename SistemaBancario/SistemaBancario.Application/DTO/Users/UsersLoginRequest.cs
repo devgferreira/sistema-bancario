@@ -8,6 +8,5 @@ namespace SistemaBancario.Application.DTO.Users
     {
         public string Cpf { get; set; }
         public string Senha { get; set; }
-        public string Token { get; set; }
     }
 }

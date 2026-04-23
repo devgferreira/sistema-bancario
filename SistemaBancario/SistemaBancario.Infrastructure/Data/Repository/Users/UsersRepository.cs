@@ -1,12 +1,12 @@
 ﻿using Dapper;
 using SistemaBancario.Domain.Entidades.Users;
 using SistemaBancario.Domain.Interfaces.Users;
-using SistemaBancario.Infrastructure.Context;
+using SistemaBancario.Infrastructure.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SistemaBancario.Infrastructure.Repository.Users
+namespace SistemaBancario.Infrastructure.Data.Repository.Users
 {
     public class UsersRepository : IUsersRepository
     {
@@ -46,7 +46,7 @@ namespace SistemaBancario.Infrastructure.Repository.Users
         {
             var sql = @"INSERT INTO Users (Nome, Cpf, Email, Senha) VALUES (@Nome, @Cpf, @Email, @Senha)";
 
-            await _context.Connection.ExecuteAsync(sql,usersInfo);
+            await _context.Connection.ExecuteAsync(sql, new { Nome = usersInfo.Nome, Cpf = usersInfo.Cpf.Valor, Email = usersInfo.Email.Valor, Senha = usersInfo.Senha.Hash });
         }
 
         public async Task DeletarUsuario(int id)

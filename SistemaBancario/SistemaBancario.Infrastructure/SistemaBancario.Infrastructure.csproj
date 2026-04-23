@@ -8,11 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.72" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.7" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.6" />
     <PackageReference Include="Npgsql" Version="10.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SistemaBancario.Application\SistemaBancario.Application.csproj" />
     <ProjectReference Include="..\SistemaBancario.Domain\SistemaBancario.Domain.csproj" />
   </ItemGroup>
 

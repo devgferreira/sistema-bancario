@@ -9,7 +9,7 @@ namespace SistemaBancario.Domain.ValueObjects
     {
         public string Hash { get; private set; }
 
-        public Senha Criar(string senha, string confirmarSenha)
+        public static Senha Criar(string senha, string confirmarSenha)
         {
             if(!ConfirmarSenha(senha, confirmarSenha))
             {
@@ -32,7 +32,7 @@ namespace SistemaBancario.Domain.ValueObjects
             return BCrypt.Net.BCrypt.Verify(senhaDigitada, Hash);
         }
 
-        public bool ConfirmarSenha(string senhaDigitada, string confirmarSenha)
+        public static bool ConfirmarSenha(string senhaDigitada, string confirmarSenha)
         {
             if (senhaDigitada != confirmarSenha)
             {
@@ -41,7 +41,7 @@ namespace SistemaBancario.Domain.ValueObjects
             return true;
         }
 
-        private bool SenhaValida(string senha)
+        private static bool SenhaValida(string senha)
         {
             var pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$";
             return Regex.IsMatch(senha, pattern);

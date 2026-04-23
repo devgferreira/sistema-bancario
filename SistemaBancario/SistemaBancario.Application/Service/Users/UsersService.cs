@@ -34,8 +34,7 @@ namespace SistemaBancario.Application.Service.Users
         {
 
 
-            var user = new UsersInfo();
-            user.Create(request.Nome, request.Cpf, request.Email, request.Senha, request.ConfirmarSenha);
+            var user = new UsersInfo().Create(request.Nome, request.Cpf, request.Email, request.Senha, request.ConfirmarSenha);
 
             await _usersRepository.CriarUsuario(user);
             var token = _authenticateService.GerarToken(user.Nome, user.Email.Valor, user.Cpf.Valor);

@@ -32,8 +32,6 @@ namespace SistemaBancario.Domain.Entidades.Users
             return userInfo;
         }
 
-       
-
      
 
      

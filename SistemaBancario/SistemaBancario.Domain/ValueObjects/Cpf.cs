@@ -6,22 +6,22 @@ namespace SistemaBancario.Domain.ValueObjects
 {
     public class Cpf
     {
-        public string Valor { get; set; }
+        public string Valor { get; private set; }
 
-
-        public Cpf Criar(string cpf)
+        public static Cpf Criar(string cpf)
         {
             if (!CpfValido(cpf))
             {
                 throw new ArgumentException("O CPF fornecido é inválido");
             }
+
             return new Cpf
             {
                 Valor = cpf
-            }; ;
+            };
         }
 
-        private bool CpfValido(string cpf)
+        private static bool CpfValido(string cpf)
         {
             if (cpf.Length != 11)
             {
