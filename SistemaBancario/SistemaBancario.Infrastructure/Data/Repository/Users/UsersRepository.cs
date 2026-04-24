@@ -2,6 +2,8 @@
 using SistemaBancario.Domain.Entidades.Users;
 using SistemaBancario.Domain.Interfaces.Users;
 using SistemaBancario.Infrastructure.Data.Context;
+using SistemaBancario.Infrastructure.Data.Entities.Users;
+using SistemaBancario.Infrastructure.Data.Mapping.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,7 +27,7 @@ namespace SistemaBancario.Infrastructure.Data.Repository.Users
 
         public async Task<List<UsersInfo>> BuscarUsuario(int? id, string? email, string? cpf)
         {
-            var sql =  @"SELECT ID, CPF, NOME, EMAIL FROM Users WHERE 1 = 1 ";
+            var sql =  @"SELECT ID, CPF, NOME, EMAIL, SENHA FROM Users WHERE 1 = 1 ";
             
             if (id != null)
             {
@@ -38,7 +40,14 @@ namespace SistemaBancario.Infrastructure.Data.Repository.Users
             {
                 sql += " AND Cpf = @Cpf ";
             }
-            var result = await _context.Connection.QueryAsync<UsersInfo>(sql, new { Id = id, Email = email, Cpf = cpf });
+            var entities = await _context.Connection.QueryAsync<UsersEntity>(sql, new { Id = id, Email = email, Cpf = cpf });
+
+            var result =  new List<UsersInfo>(entities.Count());
+            foreach (var entity in entities)
+            {
+                result.Add(entity.MapToUsersInfo());
+            }
+
             return result.ToList();
         }
 

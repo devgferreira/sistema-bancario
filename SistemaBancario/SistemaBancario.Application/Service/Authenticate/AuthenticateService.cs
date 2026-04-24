@@ -33,7 +33,8 @@ namespace SistemaBancario.Application.Service.Authenticate
                 throw new Exception("Usuário não encontrado.");
             }
            
-            if (!user.Senha.VerificarSenha(senha))
+            var senhaValida = user.Senha.VerificarSenha(senha);
+            if (!senhaValida)
             {
                 throw new ArgumentException("Senha ou Cpf inválido");
             }

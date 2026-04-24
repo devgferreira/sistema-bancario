@@ -27,6 +27,15 @@ namespace SistemaBancario.Domain.ValueObjects
             return result;
         }
 
+        public static Senha CriarSemValidacao(string senha)
+        {
+      
+            var result = new Senha
+            {
+                Hash = senha
+            };
+            return result;
+        }
         public bool VerificarSenha(string senhaDigitada)
         {
             return BCrypt.Net.BCrypt.Verify(senhaDigitada, Hash);

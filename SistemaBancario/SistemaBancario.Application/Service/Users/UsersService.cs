@@ -33,8 +33,7 @@ namespace SistemaBancario.Application.Service.Users
         public async Task<TokenResponse> Registro(UsersRegistroRequest request)
         {
 
-
-            var user = new UsersInfo().Create(request.Nome, request.Cpf, request.Email, request.Senha, request.ConfirmarSenha);
+            var user = new UsersInfo().Criar(request.Nome, request.Cpf, request.Email, request.Senha, request.ConfirmarSenha);
 
             await _usersRepository.CriarUsuario(user);
             var token = _authenticateService.GerarToken(user.Nome, user.Email.Valor, user.Cpf.Valor);

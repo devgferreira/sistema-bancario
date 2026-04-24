@@ -15,7 +15,7 @@ namespace SistemaBancario.Domain.Entidades.Users
         public Senha Senha { get; set; }
 
 
-        public UsersInfo Create(string nome, string cpf, string email, string senha, string confirmarSenha)
+        public UsersInfo Criar(string nome, string cpf, string email, string senha, string confirmarSenha)
         {
             if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(cpf) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(senha))
             {
@@ -32,8 +32,26 @@ namespace SistemaBancario.Domain.Entidades.Users
             return userInfo;
         }
 
-     
+        public UsersInfo CriarSemConfiirmarSenha(int id, string nome, string cpf, string email, string senha)
+        {
 
-     
+            var cpfValido = Cpf.Criar(cpf);
+            var emailValido = Email.Criar(email);
+            var senhaValida = Senha.CriarSemValidacao(senha);
+
+            var userInfo = new UsersInfo
+            {
+                Id = id,
+                Nome = nome,
+                Cpf = cpfValido,   
+                Email = emailValido,
+                Senha = senhaValida
+            };
+
+            return userInfo;
+        }
+
+
+
     }
 }
