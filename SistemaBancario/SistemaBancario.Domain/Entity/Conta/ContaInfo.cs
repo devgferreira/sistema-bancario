@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SistemaBancario.Domain.Entity.Conta
 {
-    internal class ContaInfo
+    public class ContaInfo
     {
         public Guid Id { get; set; } 
         public int UsertId { get; set; }
