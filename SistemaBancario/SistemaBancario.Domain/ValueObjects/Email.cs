@@ -5,9 +5,9 @@ using System.Text.RegularExpressions;
 
 namespace SistemaBancario.Domain.ValueObjects
 {
-    public class Email
+    public class    Email
     {
-        public string Valor { get; set; }
+        public string Valor { get; private set; }
 
         public static Email Criar(string email)
         {
