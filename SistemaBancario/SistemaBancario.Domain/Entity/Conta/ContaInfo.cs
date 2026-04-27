@@ -9,7 +9,7 @@ namespace SistemaBancario.Domain.Entity.Conta
     public class ContaInfo
     {
         public Guid Id { get; set; } 
-        public int UsertId { get; set; }
+        public int UserId { get; set; }
         public Saldo Saldo { get; set; }
         public Status Status { get; set; }
 
@@ -19,7 +19,7 @@ namespace SistemaBancario.Domain.Entity.Conta
             var contaInfo = new ContaInfo
             {
                 Id = Guid.NewGuid(),
-                UsertId = usertId,
+                UserId = usertId,
                 Saldo = Saldo.Criar(saldo),
                 Status = (Status)status
             };
