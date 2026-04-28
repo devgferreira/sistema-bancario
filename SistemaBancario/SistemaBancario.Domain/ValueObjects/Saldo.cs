@@ -20,7 +20,32 @@ namespace SistemaBancario.Domain.ValueObjects
             };
         }
 
-        private bool SaldoValido(double valor)
+        public static Saldo DescontarSaldo(double valorDescontado, Saldo saldoAtual)
+        {
+            var novoValor = saldoAtual.Valor - valorDescontado;
+            if (!SaldoValido(novoValor))
+            {
+                throw new ArgumentException("O saldo não pode ser negativo.");
+            }
+            return new Saldo
+            {
+                Valor = novoValor
+            };
+        }
+        public static Saldo AdicionarSaldo(double valorAdicionado, Saldo saldoAtual)
+        {
+            var novoValor = saldoAtual.Valor + valorAdicionado;
+            if (!SaldoValido(novoValor))
+            {
+                throw new ArgumentException("O saldo não pode ser negativo.");
+            }
+            return new Saldo
+            {
+                Valor = novoValor
+            };
+        }
+
+        private static bool SaldoValido(double valor)
         {
             if (valor < 0)
             {
