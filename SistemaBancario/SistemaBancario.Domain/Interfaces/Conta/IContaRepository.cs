@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SistemaBancario.Domain.Interfaces.Conta
 {
-    public interface IContaInterface
+    public interface IContaRepository
     {
         Task CriarConta(ContaInfo conta);
         Task<List<ContaInfo>> BuscarConta(Guid contaId, int usertId);
