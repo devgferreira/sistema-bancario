@@ -10,6 +10,6 @@ namespace SistemaBancario.Application.Interfaces.Conta
         Task CriarConta(CriarContaDTO criarContaDTO);
         Task AtualizarConta(AtualizarContaDTO atualizarContaDTO, Guid id, int userId);
         Task DeletarConta(Guid id, int userId);
-        Task<List<ContaDTO>> BuscarContas(int userId);
+        Task<List<ContaDTO>> BuscarContas(Guid id, int userId);
     }
 }
