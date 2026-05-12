@@ -58,7 +58,7 @@ namespace SistemaBancario.API.Controllers.Users
             }
         }
         [HttpGet]
-        public async Task<IActionResult> BuscarContas([FromQuery] Guid contaId, [FromQuery] int userId)
+        public async Task<IActionResult> BuscarContas([FromQuery] Guid? contaId, [FromQuery] int userId)
         {
             try
             {

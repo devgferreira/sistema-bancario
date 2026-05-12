@@ -3,12 +3,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SistemaBancario.Application.Interfaces.Authenticate;
+using SistemaBancario.Application.Interfaces.Conta;
 using SistemaBancario.Application.Interfaces.Users;
 using SistemaBancario.Application.Service.Authenticate;
+using SistemaBancario.Application.Service.Conta;
 using SistemaBancario.Application.Service.Users;
 using SistemaBancario.Application.Settings;
+using SistemaBancario.Domain.Interfaces.Conta;
 using SistemaBancario.Domain.Interfaces.Users;
 using SistemaBancario.Infrastructure.Data.Context;
+using SistemaBancario.Infrastructure.Data.Repository.Conta;
 using SistemaBancario.Infrastructure.Data.Repository.Users;
 using System;
 using System.Collections.Generic;
@@ -41,6 +45,8 @@ namespace SistemaBancario.Infrastructure.IoC
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IAuthenticateService, AuthenticateService>();
             services.AddSingleton<IConfiguracoesAplicacao>(appSettings);
+            services.AddScoped<IContaService, ContaService>();
+            services.AddScoped<IContaRepository, ContaRepository>();
 
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

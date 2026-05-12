@@ -23,7 +23,7 @@ namespace SistemaBancario.Infrastructure.Data.Repository.Conta
 
         public async Task AtualizarConta(ContaInfo conta, Guid contaId, int usertId)
         {
-            var sql = "UPDATE Conta SET Saldo = @Saldo, Status = @Status WHERE Id = @Id AND UserId = @UserId";
+            var sql = "UPDATE Conta SET Saldo = @Saldo, Status = @Status WHERE Id = @Id AND Users_Id = @UserId";
             await _context.Connection.ExecuteAsync(sql, new
             {
                 Id = contaId,
@@ -33,9 +33,15 @@ namespace SistemaBancario.Infrastructure.Data.Repository.Conta
             });
         }
 
-        public async Task<List<ContaInfo>> BuscarConta(Guid contaId, int usertId)
+        public async Task<List<ContaInfo>> BuscarConta(Guid? contaId, int usertId)
         {
-            var sql = "SELECT Id, UserId, Saldo, Status FROM Conta WHERE Id = @Id AND UserId = @UserId";
+            var sql = "SELECT Id, Users_Id as UserId, Saldo, Status FROM Conta WHERE Users_Id = @UserId";
+
+            if (contaId.HasValue)
+            {
+                sql += " AND Id = @Id";
+            }
+
             var entities = await _context.Connection.QueryAsync<ContaEntity>(sql, new
             {
                 Id = contaId,
@@ -52,7 +58,7 @@ namespace SistemaBancario.Infrastructure.Data.Repository.Conta
 
         public async Task CriarConta(ContaInfo conta)
         {
-           var sql = "INSERT INTO Conta ( UserId, Saldo, Status) VALUES (@Id, @UserId, @Saldo, @Status)";
+           var sql = "INSERT INTO Conta ( Users_Id, Saldo, Status) VALUES ( @UserId, @Saldo, @Status)";
 
             await _context.Connection.ExecuteAsync(sql, new
             {

@@ -1,6 +1,7 @@
 ﻿using SistemaBancario.Application.DTO.Conta;
 using SistemaBancario.Application.Interfaces.Conta;
 using SistemaBancario.Domain.Entity.Conta;
+using SistemaBancario.Domain.Enums;
 using SistemaBancario.Domain.Interfaces.Conta;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace SistemaBancario.Application.Service.Conta
             await _contaRepository.AtualizarConta(conta, id, userId);
         }
 
-        public async Task<List<ContaDTO>> BuscarContas(Guid contaId, int userId)
+        public async Task<List<ContaDTO>> BuscarContas(Guid? contaId, int userId)
         {
             var contas = await _contaRepository.BuscarConta(contaId,userId);
 
@@ -46,7 +47,7 @@ namespace SistemaBancario.Application.Service.Conta
         public async Task CriarConta(CriarContaDTO criarContaDTO)
         {
 
-            var conta = ContaInfo.Criar(criarContaDTO.UserId, criarContaDTO.Saldo, ((int)criarContaDTO.Status));
+            var conta = ContaInfo.Criar(criarContaDTO.UserId, criarContaDTO.Saldo, 0);
             await _contaRepository.CriarConta(conta);
         }
 

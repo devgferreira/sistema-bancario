@@ -9,7 +9,6 @@ namespace SistemaBancario.Application.DTO.Conta
     {
         public int UserId { get; set; }
         public double Saldo { get; set; }
-        public Status Status { get; set; }
 
     }
 }

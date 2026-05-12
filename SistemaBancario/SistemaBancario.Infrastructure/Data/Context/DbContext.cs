@@ -12,7 +12,7 @@ namespace SistemaBancario.Infrastructure.Data.Context
         public IDbConnection Connection { get; set; }
         public DbContext(IConfiguration configuration)
         {
-            var connStr = Environment.GetEnvironmentVariable("DatabaseConnection")
+            var connStr = Environment.GetEnvironmentVariable("DATABASE_CONNECTION")
                   ?? configuration.GetConnectionString("DefaultConnection");
 
             Connection = new NpgsqlConnection(connStr);

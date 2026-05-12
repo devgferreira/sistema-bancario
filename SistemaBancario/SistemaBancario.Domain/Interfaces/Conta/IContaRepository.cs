@@ -8,7 +8,7 @@ namespace SistemaBancario.Domain.Interfaces.Conta
     public interface IContaRepository
     {
         Task CriarConta(ContaInfo conta);
-        Task<List<ContaInfo>> BuscarConta(Guid contaId, int usertId);
+        Task<List<ContaInfo>> BuscarConta(Guid? contaId, int usertId);
         Task AtualizarConta(ContaInfo conta, Guid contaId, int usertId);
         Task DeletarConta (Guid contaId, int usertId);
     }
