@@ -8,6 +8,5 @@ namespace SistemaBancario.Application.DTO.Conta
     public class AtualizarContaDTO
     {
         public double Saldo { get; set; }
-        public Status Status { get; set; }
     }
 }

@@ -41,21 +41,28 @@ namespace SistemaBancario.Application.Service.Authenticate
             return users.FirstOrDefault();
         }
 
-        public string GerarToken(string nome, string email, string cpf)
+        public string GerarToken(int id, string nome, string email)
         {
             var claims = new[]
             {
+                new Claim(ClaimTypes.NameIdentifier, id.ToString()),
                 new Claim(ClaimTypes.Name, nome),
                 new Claim(ClaimTypes.Email, email),
-                new Claim(ClaimTypes.NameIdentifier, cpf),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            var privateKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuracao.JwtSecretKey));
-            var credentials = new SigningCredentials(privateKey, SecurityAlgorithms.HmacSha256);
+            var privateKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_configuracao.JwtSecretKey)
+            );
+
+            var credentials = new SigningCredentials(
+                privateKey,
+                SecurityAlgorithms.HmacSha256
+            );
+
             var expiration = DateTime.UtcNow.AddMinutes(10);
 
-            JwtSecurityToken token = new JwtSecurityToken(
+            var token = new JwtSecurityToken(
                 issuer: _configuracao.JwtIssuer,
                 audience: _configuracao.JwtAudience,
                 claims: claims,
@@ -63,10 +70,7 @@ namespace SistemaBancario.Application.Service.Authenticate
                 signingCredentials: credentials
             );
 
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-
-
-            return tokenString;
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

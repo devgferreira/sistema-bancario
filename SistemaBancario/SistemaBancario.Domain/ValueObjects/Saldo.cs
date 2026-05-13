@@ -14,6 +14,7 @@ namespace SistemaBancario.Domain.ValueObjects
             {
                 throw new ArgumentException("O saldo não pode ser negativo.");
             }
+
             return new Saldo
             {
                 Valor = valor
@@ -53,5 +54,6 @@ namespace SistemaBancario.Domain.ValueObjects
             }
             return true;
         }
+
     }
 }

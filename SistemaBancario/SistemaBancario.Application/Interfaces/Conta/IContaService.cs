@@ -7,7 +7,7 @@ namespace SistemaBancario.Application.Interfaces.Conta
 {
     public interface IContaService
     {
-        Task CriarConta(CriarContaDTO criarContaDTO);
+        Task CriarConta(CriarContaDTO criarContaDTO, int userId);
         Task AtualizarConta(AtualizarContaDTO atualizarContaDTO, Guid id, int userId);
         Task DeletarConta(Guid id, int userId);
         Task<List<ContaDTO>> BuscarContas(Guid? id, int userId);

@@ -7,7 +7,6 @@ namespace SistemaBancario.Application.DTO.Conta
 {
     public class CriarContaDTO
     {
-        public int UserId { get; set; }
         public double Saldo { get; set; }
 
     }

@@ -1,5 +1,6 @@
 ﻿using SistemaBancario.Application.DTO.Conta;
 using SistemaBancario.Application.Interfaces.Conta;
+using SistemaBancario.Domain.Entidades.Users;
 using SistemaBancario.Domain.Entity.Conta;
 using SistemaBancario.Domain.Enums;
 using SistemaBancario.Domain.Interfaces.Conta;
@@ -21,16 +22,16 @@ namespace SistemaBancario.Application.Service.Conta
         public async Task AtualizarConta(AtualizarContaDTO atualizarContaDTO, Guid id, int userId)
         {
 
-            await ValidarSeContaExiste(id, userId);
+            var contaInfo = await ValidarSeContaExiste(id, userId);
 
-             var conta = ContaInfo.Criar(userId, atualizarContaDTO.Saldo, ((int)atualizarContaDTO.Status));
+            var conta = ContaInfo.Criar(userId, atualizarContaDTO.Saldo, ((int)contaInfo.Status));
 
             await _contaRepository.AtualizarConta(conta, id, userId);
         }
 
         public async Task<List<ContaDTO>> BuscarContas(Guid? contaId, int userId)
         {
-            var contas = await _contaRepository.BuscarConta(contaId,userId);
+            var contas = await _contaRepository.BuscarConta(contaId, userId);
 
             var conta = contas.Select(c => new ContaDTO
             {
@@ -44,10 +45,10 @@ namespace SistemaBancario.Application.Service.Conta
 
         }
 
-        public async Task CriarConta(CriarContaDTO criarContaDTO)
+        public async Task CriarConta(CriarContaDTO criarContaDTO, int userId)
         {
 
-            var conta = ContaInfo.Criar(criarContaDTO.UserId, criarContaDTO.Saldo, 0);
+            var conta = ContaInfo.Criar(userId, criarContaDTO.Saldo, status: 0);
             await _contaRepository.CriarConta(conta);
         }
 
@@ -57,13 +58,14 @@ namespace SistemaBancario.Application.Service.Conta
             await _contaRepository.DeletarConta(id, userId);
         }
 
-        private async Task ValidarSeContaExiste(Guid id, int userId)
+        private async Task<ContaInfo> ValidarSeContaExiste(Guid id, int userId)
         {
             var result = await _contaRepository.BuscarConta(id, userId);
-            if (result == null)
+            if (result.Count == 0)
             {
                 throw new Exception("Conta não encontrada.");
             }
+            return result.FirstOrDefault();
         }
     }
 }

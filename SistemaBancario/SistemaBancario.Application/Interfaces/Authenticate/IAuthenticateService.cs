@@ -8,6 +8,6 @@ namespace SistemaBancario.Application.Interfaces.Authenticate
     public interface IAuthenticateService
     {
         Task<UsersInfo> AutenticarAsync(string cpf, string senha);
-        public string GerarToken(string nome, string email, string cpf);
+        public string GerarToken(int id, string nome, string email);
     }
 }

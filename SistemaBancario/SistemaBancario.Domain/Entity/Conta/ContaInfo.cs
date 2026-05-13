@@ -16,6 +16,10 @@ namespace SistemaBancario.Domain.Entity.Conta
 
         public static ContaInfo Criar(int usertId, double saldo, int status)
         {
+            if (ValidarContaBloqueada(status))
+            {
+                throw new InvalidOperationException("Conta bloqueada.");
+            }
             var contaInfo = new ContaInfo
             {
                 Id = Guid.NewGuid(),
@@ -24,6 +28,15 @@ namespace SistemaBancario.Domain.Entity.Conta
                 Status = (Status)status
             };
             return contaInfo;
+        }
+
+        private static bool ValidarContaBloqueada(int status)
+        {
+            if (status == 1)
+            {
+                return true;
+            }
+            return false;
         }
 
     }

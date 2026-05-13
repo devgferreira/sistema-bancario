@@ -71,7 +71,7 @@ namespace SistemaBancario.Infrastructure.Data.Repository.Conta
 
         public async Task DeletarConta(Guid contaId, int usertId)
         {
-            var sql = "DELETE FROM Conta WHERE Id = @Id AND UserId = @UserId";
+            var sql = "DELETE FROM Conta WHERE Id = @Id AND Users_Id = @UserId";
             await _context.Connection.ExecuteAsync(sql, new
             {
                 Id = contaId,

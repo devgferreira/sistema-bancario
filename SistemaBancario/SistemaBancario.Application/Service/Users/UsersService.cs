@@ -25,7 +25,7 @@ namespace SistemaBancario.Application.Service.Users
         {
 
            var user = await _authenticateService.AutenticarAsync(request.Cpf, request.Senha);
-           var token =  _authenticateService.GerarToken(user.Nome, user.Email.Valor, user.Cpf.Valor);
+           var token =  _authenticateService.GerarToken(user.Id, user.Email.Valor, user.Cpf.Valor);
 
            return new TokenResponse { Token = token };
         }
@@ -36,7 +36,7 @@ namespace SistemaBancario.Application.Service.Users
             var user = new UsersInfo().Criar(request.Nome, request.Cpf, request.Email, request.Senha, request.ConfirmarSenha);
 
             await _usersRepository.CriarUsuario(user);
-            var token = _authenticateService.GerarToken(user.Nome, user.Email.Valor, user.Cpf.Valor);
+            var token = _authenticateService.GerarToken(user.Id, user.Email.Valor, user.Cpf.Valor);
 
             return new TokenResponse { Token = token };
         }
